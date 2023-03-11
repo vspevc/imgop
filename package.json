@@ -1,0 +1,16 @@
+{
+  "name": "images",
+  "version": "1.0.0",
+  "description": "cli app for image optimization using sharp",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "sharp": "^0.31.3"
+  }
+}
