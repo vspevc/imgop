@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-node "$HOME/code/images/src"
+node "$HOME/code/imgop/src"
