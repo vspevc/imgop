@@ -1,29 +1,28 @@
 import * as fileSystem from "fs/promises";
 import ProcessImages from "../ProcessImages/ProcessImages.js";
+import Options from "../Options/Options.js";
 
-const GetFiles = async (imagesPath) => {
-    try {
-        await fileSystem.access(imagesPath);
-    } catch (error) {
-        console.log(`${imagesPath} does not exists.`);
-        return;
-    }
+const GetFiles = async () => {
+  const { imagesPath, destination } = Options;
 
-    if (imagesPath[imagesPath.length - 1] !== '/') {
-        imagesPath += '/';
-    }
+  try {
+    await fileSystem.access(imagesPath);
+  } catch (error) {
+    console.log(`${imagesPath} does not exists.`);
+    return;
+  }
 
-    const optimizedDirectory = imagesPath + 'optimized/';
+  try {
+    await fileSystem.access(destination);
+  } catch (error) {
+    await fileSystem.mkdir(destination);
+  }
 
-    try {
-        await fileSystem.access(optimizedDirectory);
-    } catch (error) {
-        await fileSystem.mkdir(optimizedDirectory);
-    }
+  const imagesDirectory = await fileSystem.readdir(imagesPath, {
+    withFileTypes: true,
+  });
 
-    const imagesDirectory = await fileSystem.readdir(imagesPath, { withFileTypes: true });
-
-    await ProcessImages(imagesPath, imagesDirectory);
-}
+  await ProcessImages(imagesDirectory);
+};
 
 export default GetFiles;
