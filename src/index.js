@@ -1,3 +1,6 @@
 import GetFiles from "./GetFiles/GetFiles.js";
+import Options from "./Options/Options.js";
 
-await GetFiles("./");
+if (Options.format) {
+  await GetFiles("./");
+}
