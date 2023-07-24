@@ -33,32 +33,39 @@ program
 );
 
 program.parse();
+const {
+  directory,
+  destination,
+  resizeWidth,
+  format,
+  quality
+} = program.opts();
 
-const imagesPath = sanitizePath(program.opts().directory);
-const destination = sanitizePath(program.opts().destination, imagesPath);
+const imagesPath = sanitizePath(directory);
+const imagesDestination = sanitizePath(destination, imagesPath);
 
-const resizeWidth = Number.isNaN(+program.opts().resizeWidth)
+const imagesResizeWidth = Number.isNaN(+resizeWidth)
   ? null
-  : +program.opts().resizeWidth;
+  : +resizeWidth;
 
-let format = null;
-const imageQuality = +program.opts().quality;
+let imagesFormat = null;
+const imagesQuality = +quality;
 
 try {
-  CheckImageQuality(imageQuality);
+  CheckImageQuality(imagesQuality);
 
-  format = CheckImageFormat(program.opts().format);
+  imagesFormat = CheckImageFormat(format);
 } catch (error) {
   console.log(error.message);
 }
 
 const Options = {
   imagesPath,
-  destination,
-  format,
-  resizeWidth,
+  destination: imagesDestination,
+  format: imagesFormat,
+  resizeWidth: imagesResizeWidth,
   imageOptions: {
-    quality: imageQuality,
+    quality: imagesQuality,
   },
 };
 
