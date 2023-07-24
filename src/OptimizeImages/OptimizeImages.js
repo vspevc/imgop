@@ -2,7 +2,7 @@ import sharp from "sharp";
 import Options from "../Options/Options.js";
 
 const OptimizeImages = async (imageName) => {
-  const { imagesPath, destination, format, imageOptions } = Options;
+  const { imagesPath, destination, format, resizeWidth, imageOptions } = Options;
 
   const imagePath = `${imagesPath}${imageName}`;
   const NewImagePath = `${destination}${imageName.replace(
@@ -10,7 +10,10 @@ const OptimizeImages = async (imageName) => {
     `.${format}`
   )}`;
 
-  await sharp(imagePath).toFormat(format, imageOptions).toFile(NewImagePath);
+  await sharp(imagePath)
+    .resize(resizeWidth)
+    .toFormat(format, imageOptions)
+    .toFile(NewImagePath);
 };
 
 export default OptimizeImages;
