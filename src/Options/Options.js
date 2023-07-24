@@ -25,12 +25,21 @@ program
     "-q, --quality <number 1-100>",
     "Set the image option quality level.",
     "80"
-  );
+  )
+  .option(
+  "-w, --resize-width <number in pixel>",
+  "Set the image width, it scales the image.",
+  "image width (null)"
+);
 
 program.parse();
 
 const imagesPath = sanitizePath(program.opts().directory);
 const destination = sanitizePath(program.opts().destination, imagesPath);
+
+const resizeWidth = Number.isNaN(+program.opts().resizeWidth)
+  ? null
+  : +program.opts().resizeWidth;
 
 let format = null;
 const imageQuality = +program.opts().quality;
@@ -47,6 +56,7 @@ const Options = {
   imagesPath,
   destination,
   format,
+  resizeWidth,
   imageOptions: {
     quality: imageQuality,
   },
