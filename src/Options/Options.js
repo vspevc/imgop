@@ -48,7 +48,7 @@ const imagesResizeWidth = Number.isNaN(+resizeWidth)
   ? null
   : +resizeWidth;
 
-let imagesFormat = null;
+let imagesFormat;
 const imagesQuality = +quality;
 
 try {
