@@ -1,10 +1,17 @@
+import * as fileSystem from "fs/promises";
 import OptimizeImages from "../OptimizeImages/OptimizeImages.js";
 import Options from "../Options/Options.js";
 
-const ProcessImages = (imagesDirectory) => {
+const ProcessImages = async (imagesDirectory) => {
   const { destination, format } = Options;
 
-  imagesDirectory.forEach(async (image) => {
+  try {
+    await fileSystem.access(destination);
+  } catch (error) {
+    await fileSystem.mkdir(destination);
+  }
+
+  for (const image of imagesDirectory) {
     if (image.isFile()) {
       const { name: imageName } = image;
 
@@ -19,7 +26,13 @@ const ProcessImages = (imagesDirectory) => {
         }
       }
     }
-  });
+  }
+
+  const destinationDirectory = await fileSystem.readdir(destination);
+
+  if (!destinationDirectory.length) {
+    await fileSystem.rmdir(destination);
+  }
 };
 
 export default ProcessImages;
