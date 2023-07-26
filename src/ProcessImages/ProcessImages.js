@@ -3,6 +3,10 @@ import OptimizeImages from "../OptimizeImages/OptimizeImages.js";
 import Options from "../Options/Options.js";
 
 const ProcessImages = async (imagesDirectory) => {
+  if (!imagesDirectory) {
+    return;
+  }
+
   const { destination, format } = Options;
 
   try {
