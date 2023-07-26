@@ -13,7 +13,7 @@ program
   )
   .option(
     "-s, --destination <path>",
-    "Set the directory where you want to save the new images.",
+    "Set the directory where you want to save the new images inside old images directory.",
     "optimized/"
   )
   .option(
