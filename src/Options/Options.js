@@ -8,12 +8,12 @@ const program = new Command();
 program
   .option(
     "-d, --directory <path>",
-    "Set the directory you want to optimize images.",
+    "Set the directory where are the images to convert.",
     "./"
   )
   .option(
     "-s, --destination <path>",
-    "Set the directory where you want to save the optimized images.",
+    "Set the directory where you want to save the new images inside old images directory.",
     "optimized/"
   )
   .option(
@@ -23,12 +23,12 @@ program
   )
   .option(
     "-q, --quality <number 1-100>",
-    "Set the image option quality level.",
+    "Set the image quality level.",
     "80"
   )
   .option(
-  "-w, --resize-width <number in pixel>",
-  "Set the image width, it scales the image.",
+  "-w, --resize-width <number>",
+  "Set the new image width in pixels, it scales the image.",
   "image width (null)"
 );
 
