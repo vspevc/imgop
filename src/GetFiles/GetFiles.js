@@ -22,7 +22,7 @@ const GetFiles = async () => {
     withFileTypes: true,
   });
 
-  await ProcessImages(imagesDirectory);
+  return imagesDirectory;
 };
 
 export default GetFiles;
